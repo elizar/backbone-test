@@ -1,12 +1,12 @@
 ## contact app
 ---
 
-**About: ** _a simplistic contact manager app that uses
+**About:** _a simplistic contact manager app that uses
 [backbone.js](http://backbonejs.org/) on the front-end and
 [mongodb](http://mongodb.org/) and [node.js](http://nodejs.org) for the
 back-end_
 
-**Server-side Requirements: ** `mongodb` `node.js`
+**Server-side Requirements:** `mongodb` `node.js`
 
 ---
 

@@ -48,7 +48,6 @@ exports.put = function(req, res) {
 
 exports.del = function(req, res) {
   models.Contact.remove({_id: req.url.split('/')[2]}, function (err, person) {
-    console.log('asdad');
     if (err) {
       return res.end(JSON.stringify(err));
     }

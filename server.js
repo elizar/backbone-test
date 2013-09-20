@@ -63,7 +63,7 @@ var routes = {
   server = http.createServer(function(req, res) {
 
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     var _path = path.join(__dirname, req.url);

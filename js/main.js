@@ -36,8 +36,8 @@
     handleContact: function(contact) {
 
       var self = this;
-
       if (contact.get('_id')) {
+        contact.set('position', self.collection.length);
         var view = new PersonView({
           model: contact
         });
@@ -75,7 +75,7 @@
             // Don't have to fetch from server anymore just
             // set model's _id to c._id
             contact.set('_id', c._id);
-
+            contact.set('position', self.collection.length);
             var view = new PersonView({
               model: contact
             });

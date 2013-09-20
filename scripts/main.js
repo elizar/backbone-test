@@ -16,68 +16,73 @@
       self.input_number = $('#inputs input[name=number]');
       self.input_username = $('#inputs input[name=username]');
       self.contacts_list = $('.table tbody');
-      self.listenTo(self.collection, 'add', function(contact) {
+      self.listenTo(self.collection, 'add', self.handleContact);
 
-        if (contact.get('_id')) {
-          var view = new PersonView({
-            model: contact
-          });
-          return $('#inputs').after(view.render().el);
-        }
+    },
 
-        self.collection.sync('create', contact, {
-          success: function(c) {
+    handleContact: function(contact) {
 
-            // Reset input styles
-            $('#inputs input').css('background-color', 'white');
-            // SUCCESS !== error-free
-            if (c.error) {
+      var self = this;
 
-              // Handles Duplicate
-              if (c.error.err) {
-                self.input_username.css('background-color', 'rgba(255,0,0,0.2)');
-              }
+      if (contact.get('_id')) {
+        var view = new PersonView({
+          model: contact
+        });
+        return $('#inputs').after(view.render().el);
+      }
 
-              // Handles Path Error
-              if (c.error.path) {
-                self['input_' + c.error.path].css('background-color', 'rgba(255,0,0,0.2)');
-              }
+      self.collection.sync('create', contact, {
+        success: function(c) {
 
-              // Handles Multiple Errors
-              var errors = c.error.errors;
-              if (errors) {
-                Object.keys(errors).forEach(function(k) {
-                  self['input_' + k].css('background-color', 'rgba(255,0,0,0.2)');
-                });
-              }
+          // Reset input styles
+          $('#inputs input').css('background-color', 'white');
+          // SUCCESS !== error-free
+          if (c.error) {
 
-            } else {
-
-              // Don't have to fetch from server anymore just
-              // set model's _id to c._id
-
-              contact.set('_id', c._id);
-
-              var view = new PersonView({
-                model: contact
-              });
-
-              // Reset input values
-              $('#inputs input').val('');
-              $('#inputs').after(view.render().el).nextAll().eq(0).css('display', 'none').fadeIn(500);
-              return;
-
+            // Handles Duplicate
+            if (c.error.err) {
+              self.input_username.css('background-color', 'rgba(255,0,0,0.2)');
             }
-          },
 
-          // Just for fun!
-          error: function(e) {
-            alert('Error : Ohpps! Something went wrong.');
+            // Handles Path Error
+            if (c.error.path) {
+              self['input_' + c.error.path].css('background-color', 'rgba(255,0,0,0.2)');
+            }
+
+            // Handles Multiple Errors
+            var errors = c.error.errors;
+            if (errors) {
+              Object.keys(errors).forEach(function(k) {
+                self['input_' + k].css('background-color', 'rgba(255,0,0,0.2)');
+              });
+            }
+
+          } else {
+
+            // Don't have to fetch from server anymore just
+            // set model's _id to c._id
+            contact.set('_id', c._id);
+
+            var view = new PersonView({
+              model: contact
+            });
+
+            // Reset input values
+            $('#inputs input').val('');
+            $('#inputs').after(view.render().el).nextAll().eq(0).css('display', 'none').fadeIn(500);
+            return;
+
           }
 
-        });
+        },
+
+        // Just for fun!
+        error: function(e) {
+          alert('Error : Ohpps! Something went wrong.');
+        }
 
       });
+
     },
 
     addPerson: function(evt) {
@@ -89,6 +94,7 @@
       });
 
       self.collection.add(person);
+
     }
 
   });

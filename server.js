@@ -41,10 +41,6 @@ var http = require('http'),
 
 var routes = {
   "/": function(req, res) {
-    res.writeHead(200, {
-      "Content-Type": "text/html",
-      "Access-Control-Allow-Origin": "http://elizar.github.io/"
-    });
     res.end(fs.readFileSync('index.html', 'utf-8'));
   },
   "/contacts": function(req, res) {
@@ -65,6 +61,11 @@ var routes = {
   }
 },
   server = http.createServer(function(req, res) {
+
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
     var _path = path.join(__dirname, req.url);
     if (path.extname(_path) !== "") {
       fs.exists(_path, function(exists) {
@@ -72,8 +73,7 @@ var routes = {
           fs.readFile(_path, function(err, data) {
             if (!err) {
               res.writeHead(200, {
-                "Content-Type": mime[path.extname(_path)],
-                "Access-Control-Allow-Origin": "http://elizar.github.io/"
+                "Content-Type": mime[path.extname(_path)]
               });
               res.end(data);
             }

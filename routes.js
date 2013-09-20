@@ -3,14 +3,12 @@ var mongoose = require('mongoose'),
   models = mongoose.models;
 
 exports.get = function(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "http://elizar.github.io/");
   models.Contact.find({}, function(err, results) {
     res.end(JSON.stringify(results));
   });
 };
 
 exports.post = function(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "http://elizar.github.io/");
   var _body = '';
   req.setEncoding('utf8');
   req.on('data', function(chunk) {
@@ -32,7 +30,6 @@ exports.post = function(req, res) {
 };
 
 exports.put = function(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "http://elizar.github.io/");
   var _body = '';
   req.setEncoding('utf8');
   req.on('data', function(chunk) {
@@ -50,7 +47,6 @@ exports.put = function(req, res) {
 };
 
 exports.del = function(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "http://elizar.github.io/");
   models.Contact.remove({_id: req.url.split('/')[2]}, function (err, person) {
     console.log('asdad');
     if (err) {

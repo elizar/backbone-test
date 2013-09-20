@@ -142,7 +142,8 @@
       return this;
     },
 
-    editPerson: function() {
+    editPerson: function(e) {
+      e.preventDefault();
       var _etmpl = _.template(this.editTemplate);
       this.$el.html(_etmpl(this.model.toJSON()));
       return this;
@@ -162,7 +163,8 @@
       });
     },
 
-    deletePerson: function() {
+    deletePerson: function(e) {
+      e.preventDefault();
       // Yeah, kicking it old skul buddy!
       var oks = confirm('Are you sure about this?');
       if (!oks) return;
@@ -173,7 +175,7 @@
       });
     },
 
-    removeView: function(e) {
+    removeView: function() {
       this.$el.hide(300, function() {
         this.remove();
       });

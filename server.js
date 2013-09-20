@@ -43,7 +43,7 @@ var routes = {
   "/": function(req, res) {
     res.writeHead(200, {
       "Content-Type": "text/html",
-      "Access-Control-Allow-Origin": "*"
+      "Access-Control-Allow-Origin": "http://elizar.github.io/"
     });
     res.end(fs.readFileSync('index.html', 'utf-8'));
   },
@@ -73,7 +73,7 @@ var routes = {
             if (!err) {
               res.writeHead(200, {
                 "Content-Type": mime[path.extname(_path)],
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "http://elizar.github.io/"
               });
               res.end(data);
             }

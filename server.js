@@ -102,6 +102,6 @@ var routes = {
 
   });
 
-server.listen(3000);
+server.listen(3000, '0.0.0.0');
 
 console.log("Server listening to port 3000");

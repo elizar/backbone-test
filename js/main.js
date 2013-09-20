@@ -5,7 +5,8 @@
   var App = Backbone.View.extend({
     el: "#contacts",
     events: {
-      'click #add_contact': 'addPerson'
+      'click #add_contact': 'addPerson',
+      'keyup #inputs input': 'handleReturn'
     },
 
     initialize: function() {
@@ -17,6 +18,18 @@
       self.input_username = $('#inputs input[name=username]');
       self.contacts_list = $('.table tbody');
       self.listenTo(self.collection, 'add', self.handleContact);
+
+    },
+
+    handleReturn: function(e) {
+
+      var self = this;
+      if (e.which === 13) {
+        e.preventDefault();
+        // if enter key
+        return self.addPerson();
+
+      }
 
     },
 
@@ -85,7 +98,8 @@
 
     },
 
-    addPerson: function(evt) {
+    addPerson: function(e) {
+
       var self = this;
       var person = new PersonModel({
         name: self.input_name.val().trim(),

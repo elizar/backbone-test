@@ -1,7 +1,12 @@
-# README
+## contact app
 ---
 
-**Backbone.js** test
+**About: ** _a simplistic contact manager app that uses
+[backbone.js](http://backbonejs.org/) on the front-end and
+[mongodb](http://mongodb.org/) and [node.js](http://nodejs.org) for the
+back-end_
+
+**Server-side Requirements: ** `mongodb` `node.js`
 
 ---
 
@@ -16,11 +21,17 @@ Download dependencies
 
     $ npm install
     
-Run http server to serve static files and to serve /contacts api
-resource
+Now do the following:
     
-    $ node server 
+    // run mongodb server
+    $ mongod&
+    // run http server
+    $ node server.js 
 
--
-### You've got serve!
-Fireup your browser and head to http://localhost:3000/ to test the app
+
+**You've got serve!**
+Go ahead and fireup your browser and head to `http://localhost:3000/` to
+test the app.
+
+
+

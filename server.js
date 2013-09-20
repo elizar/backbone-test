@@ -66,7 +66,7 @@ var routes = {
     res.setHeader('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     if (req.method === 'OPTIONS') {
-      res.send(200);
+      res.end(200);
     }
     var _path = path.join(__dirname, req.url);
     if (path.extname(_path) !== "") {

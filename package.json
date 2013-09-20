@@ -1,0 +1,15 @@
+{
+  "name": "backbone-test",
+  "version": "0.0.0",
+  "description": "backbone test",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Elizar Pepino",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "mongoose": "~3.6.19"
+  }
+}

@@ -36,7 +36,7 @@
     getPos: function(model) {
 
       var self = this;
-      return _.indexOf(self.collections.models, model);
+      return _.indexOf(self.collection.models, model);
 
     },
 

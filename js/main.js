@@ -17,7 +17,12 @@
       self.input_number = $('#inputs input[name=number]');
       self.input_username = $('#inputs input[name=username]');
       self.contacts_list = $('.table tbody');
-      self.listenTo(self.collection, 'add', self.handleContact);
+      self.listenTo(self.collection, 'add', self.handleAdd);
+      self.listenTo(self.collection, 'remove', function(r) {
+       self.collection.models.forEach(function(model) {
+        model.set('position', self.getPos(model));
+       });
+      });
 
     },
 
@@ -40,7 +45,7 @@
 
     },
 
-    handleContact: function(contact) {
+    handleAdd: function(contact) {
 
       var self = this;
       var pos = self.getPos(contact);
@@ -136,6 +141,10 @@
     idAttribute: '_id', // add this stuff to automate id process lols
     initialize: function() {
 
+    },
+
+    getIndex: function() {
+      
     }
   });
 
@@ -153,6 +162,10 @@
     editTemplate: $('#edit_mode_template').html(),
     initialize: function() {
       var self = this;
+      self.listenTo(self.model, 'all', self.render);
+      self.listenTo(self.model, 'request', function() {
+        console.log(arguments);
+      });
     },
 
     events: {
@@ -163,7 +176,7 @@
     },
 
     render: function(e) {
-      if (e) {
+      if (e && e.preventDefault) {
         e.preventDefault();
       }
       var _tmpl = _.template(this.template);
@@ -181,16 +194,13 @@
     updatePerson: function(e) {
       e.preventDefault();
       var self = this;
-      self.model.set('name', $(self.el).find('input[name=fullname]').val().trim());
-      self.model.set('number', $(self.el).find('input[name=number]').val().trim());
-      self.model.set('username', $(self.el).find('input[name=username]').val().trim());
-      self.model.sync('update', self.model, {
-        success: function(err, result) {
-          if (result === 'success') {
-            self.render();
-          }
-        }
-      });
+      var data = {
+        name: self.$el.find('input[name=fullname]')[0].value.trim(),
+        number: self.$el.find('input[name=number]')[0].value.trim(),
+        username: self.$el.find('input[name=username]')[0].value.trim()
+      };
+      self.model.set(data);
+      self.model.sync('update', self.model);
     },
 
     deletePerson: function(e) {

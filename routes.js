@@ -39,9 +39,13 @@ exports.put = function(req, res) {
     var _person = JSON.parse(_body);
     var _id = _person._id;
     delete _person._id;
-    models.Contact.findOneAndUpdate({_id: _id}, _person, function (docs) {
-      console.log(docs);
-      return res.end(JSON.stringify(docs));
+    delete _person.position;
+    models.Contact.findOneAndUpdate({_id: _id}, _person, function (err, result) {
+      //console.log(result);
+      if (err) {
+        return res.end(JSON.stringify(err));
+      }
+      return res.end(JSON.stringify(result));
     });
 
   });

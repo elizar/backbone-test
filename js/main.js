@@ -17,9 +17,6 @@
       self.input_number = $('#inputs input[name=number]');
       self.input_username = $('#inputs input[name=username]');
       self.contacts_list = $('.table tbody');
-      self.listenTo(self.collection, 'all', function(r) {
-        console.log(r);
-      });
       self.listenTo(self.collection, 'add', self.handleContact);
 
     },
@@ -83,6 +80,7 @@
 
             // remove temporarily added model
             self.collection.remove(contact);
+            self.input_name.focus();
 
           } else {
 
@@ -95,6 +93,7 @@
 
             // Reset input values
             $('#inputs input').val('');
+            self.input_name.focus();
             $('#inputs').after(view.render().el).nextAll().eq(0).css('display', 'none').fadeIn(500);
             return;
 

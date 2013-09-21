@@ -40,6 +40,7 @@ exports.put = function(req, res) {
     var _id = _person._id;
     delete _person._id;
     models.Contact.findOneAndUpdate({_id: _id}, _person, function (docs) {
+      console.log(docs);
       return res.end(JSON.stringify(docs));
     });
 

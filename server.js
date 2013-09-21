@@ -22,7 +22,8 @@ var http = require('http'),
   var ContactSchema = new mongoose.Schema({
     name: {
       type: String,
-      required: true
+      required: true,
+      match: /.{3,}/
     },
     number: {
       type: Number,
@@ -31,7 +32,8 @@ var http = require('http'),
     username: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
+      match: /.{3,}/
     }
   }, {
     strict: true

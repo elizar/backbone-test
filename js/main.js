@@ -17,6 +17,9 @@
       self.input_number = $('#inputs input[name=number]');
       self.input_username = $('#inputs input[name=username]');
       self.contacts_list = $('.table tbody');
+      self.listenTo(self.collection, 'all', function(r) {
+        console.log(r);
+      });
       self.listenTo(self.collection, 'add', self.handleContact);
 
     },
@@ -43,8 +46,9 @@
     handleContact: function(contact) {
 
       var self = this;
+      var pos = self.getPos(contact);
       if (contact.get('_id')) {
-        contact.set('position', self.getPos(contact));
+        contact.set('position', pos);
         var view = new PersonView({
           model: contact
         });
@@ -77,12 +81,14 @@
               });
             }
 
+            // remove temporarily added model
+            self.collection.remove(contact);
+
           } else {
 
             // Don't have to fetch from server anymore just
             // set model's _id to c._id
-            contact.set('position', self.getPos(contact));
-            contact.set('_id', c._id);
+            contact.set('position', pos);
             var view = new PersonView({
               model: contact
             });

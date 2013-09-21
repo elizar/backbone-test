@@ -52,10 +52,11 @@ exports.put = function(req, res) {
 };
 
 exports.del = function(req, res) {
-  models.Contact.remove({_id: req.url.split('/')[2]}, function (err, person) {
+  models.Contact.remove({_id: req.url.split('/').pop()}, function (err, affectedRows) {
+    console.log(arguments);
     if (err) {
       return res.end(JSON.stringify(err));
     }
-    return res.end(JSON.stringify(person));
+    return res.end(JSON.stringify(affectedRows));
   });
 };

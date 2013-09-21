@@ -32,6 +32,10 @@
 
             input {
                 outline: none;
+                padding: 5px;
+            }
+
+            #inputs {
             }
 
             .hero-unit h1 {
@@ -48,6 +52,7 @@
 
             .table td {
                 text-align: left;
+                padding: 10px;
             }
 
             .table tr {
@@ -60,23 +65,15 @@
             .row {
                 position: relative;
             }
-            .table .controls, .table .confirmation {
-                font-size: 16px;
-                color: #09629E;
-                text-align: center;
-            }
-            .done, .cancel {
-                cursor: pointer;
-                margin: 0px 10px;
-            }
-            .done:hover, .cancel:hover {
-                text-decoration: underline;
-            }
             .done {
                 color: green;
             }
             .cancel {
                 color: gray;
+            }
+            .controls {
+              text-align: center !important;
+              color: #ccc;
             }
         </style>
     </head>
@@ -91,15 +88,16 @@
                             <th>Name</th>
                             <th>Contact Number</th>
                             <th>Username</th>
-                            <th></th>
+                            <th class="controls"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr id="inputs">
-                            <td><button id="add_contact" data-toggle="tooltip" title="Save contact">+</button></td>
+                            <td></td>
                             <td><input type="text" name="fullname"></td>
                             <td><input type="text" name="number"></td>
                             <td><input type="text" name="username"></td>
+                            <td class="controls"><button id="add_contact" data-toggle="tooltip" title="Save contact"> + Add Contact </button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -118,7 +116,7 @@
         <td><input type="text" name="fullname" value="<%= name %>"></td>
         <td><input type="text" name="number" value="<%= number %>"></td>
         <td><input type="text" name="username" value="<%= username %>"></td>
-        <td class="confirmation"><span class="done">Done</span><span class="cancel">Cancel</span></td>
+        <td class="controls"><a href="#" class="done">Done</a> | <a href="#" class="cancel">Cancel</a></td>
     </script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>

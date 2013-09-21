@@ -36,7 +36,7 @@
     getPos: function(model) {
 
       var self = this;
-      return _.indexOf(self.collection.models, model) + 1;
+      return _.indexOf(self.collection.models, model);
 
     },
 
@@ -81,8 +81,8 @@
 
             // Don't have to fetch from server anymore just
             // set model's _id to c._id
-            contact.set('_id', c._id);
             contact.set('position', self.getPos(contact));
+            contact.set('_id', c._id);
             var view = new PersonView({
               model: contact
             });
@@ -157,7 +157,10 @@
       'click .done': 'updatePerson'
     },
 
-    render: function() {
+    render: function(e) {
+      if (e) {
+        e.preventDefault();
+      }
       var _tmpl = _.template(this.template);
       this.$el.html(_tmpl(this.model.toJSON()));
       return this;
@@ -170,7 +173,8 @@
       return this;
     },
 
-    updatePerson: function() {
+    updatePerson: function(e) {
+      e.preventDefault();
       var self = this;
       self.model.set('name', $(self.el).find('input[name=fullname]').val().trim());
       self.model.set('number', $(self.el).find('input[name=number]').val().trim());

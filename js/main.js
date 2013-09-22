@@ -49,7 +49,7 @@
 
       var self = this;
       var pos = self.getPos(contact);
-      if (contact.get('_id')) {
+      if (!contact.isNew()) {
         contact.set('position', pos);
         var view = new PersonView({
           model: contact
